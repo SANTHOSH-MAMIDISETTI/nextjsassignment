@@ -118,7 +118,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import dbConnect from '../../../lib/db';
 import Product from '@/app/models/product';
-import { uploadToFirebase, deleteFromFirebase } from '../../../utils/firebase';
+import { uploadToFirebase, } from '../../../utils/firebase';
 import formidable, { IncomingForm, File } from 'formidable';
 import path from 'path';
 import fs from 'fs';
