@@ -12,9 +12,9 @@ out/
 #  THIS IS DUMB AND VERY DANGEROUS TO USE FIX IT ASAP
 
 # Local environment files
-# .env
-# .env.local
-# .env.*.local
+.env
+.env.local
+.env.*.local
 
 # Log files
 npm-debug.log*
