@@ -51,7 +51,9 @@
 
 // export default NextAuth(options);
 
-import NextAuth, { NextAuthOptions, Session as NextAuthSession, JWT as NextAuthJWT } from "next-auth";
+// import NextAuth, { NextAuthOptions, Session as NextAuthSession, JWT as NextAuthJWT } from "next-auth";
+import NextAuth, { NextAuthOptions, Session as NextAuthSession, getToken as NextAuthJWT } from "next-auth";
+
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "../../../lib/db"; // Adjust the import path as needed
 import bcrypt from "bcryptjs";
