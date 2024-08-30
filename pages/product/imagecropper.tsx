@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Cropper from 'react-image-crop';
-// import 'react-image-crop/dist/ReactImageCrop/.css';
+import Cropper from 'react-easy-crop';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -12,14 +11,17 @@ interface ImageCropperProps {
 }
 
 const ImageCropper: React.FC<ImageCropperProps> = ({ imageUrl, onCrop, onClose, open }) => {
-  const [crop, setCrop] = useState({
+  const [crop, setCrop] = useState<{ unit: string; width: number; aspect: number; x: number; y: number; height: number }>({
     unit: '%',
     width: 30,
     aspect: 1 / 1,
+    x: 0,
+    y: 0,
+    height: 0,
   });
-  const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
+  const [completedCrop, setCompletedCrop] = useState<{ unit: string; width: number; aspect: number; x: number; y: number; height: number } | null>(null);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
-  
+
   useEffect(() => {
     if (imageUrl) {
       const img = new Image();
@@ -28,7 +30,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({ imageUrl, onCrop, onClose, 
     }
   }, [imageUrl]);
 
-  const handleCropComplete = (crop: Crop) => {
+  const handleCropComplete = (crop: { unit: string; width: number; aspect: number; x: number; y: number; height: number }) => {
     setCompletedCrop(crop);
   };
 
@@ -39,24 +41,29 @@ const ImageCropper: React.FC<ImageCropperProps> = ({ imageUrl, onCrop, onClose, 
       const scaleY = image.naturalHeight / image.height;
       canvas.width = completedCrop.width;
       canvas.height = completedCrop.height;
-      const ctx = canvas.getContext('2d')!;
-      ctx.drawImage(
-        image,
-        completedCrop.x * scaleX,
-        completedCrop.y * scaleY,
-        completedCrop.width * scaleX,
-        completedCrop.height * scaleY,
-        0,
-        0,
-        completedCrop.width,
-        completedCrop.height
-      );
-      canvas.toBlob(blob => {
-        if (blob) {
-          const croppedFile = new File([blob], 'cropped-image.jpg', { type: 'image/jpeg' });
-          onCrop(croppedFile);
-        }
-      }, 'image/jpeg');
+      const ctx = canvas.getContext('2d');
+
+      if (ctx) { // Ensure ctx is not null
+        ctx.drawImage(
+          image,
+          completedCrop.x * scaleX,
+          completedCrop.y * scaleY,
+          completedCrop.width * scaleX,
+          completedCrop.height * scaleY,
+          0,
+          0,
+          completedCrop.width,
+          completedCrop.height
+        );
+        canvas.toBlob(blob => {
+          if (blob) {
+            const croppedFile = new File([blob], 'cropped-image.jpg', { type: 'image/jpeg' });
+            onCrop(croppedFile);
+          }
+        }, 'image/jpeg');
+      } else {
+        console.error('Failed to get canvas context');
+      }
     }
   };
 
@@ -77,10 +84,10 @@ const ImageCropper: React.FC<ImageCropperProps> = ({ imageUrl, onCrop, onClose, 
       <DialogContent>
         {image && (
           <Cropper
-            src={imageUrl}
+            image={imageUrl}
             crop={crop}
-            onChange={setCrop}
-            onComplete={handleCropComplete}
+            onCropComplete={handleCropComplete}
+            onCropChange={() => {}}
           />
         )}
       </DialogContent>

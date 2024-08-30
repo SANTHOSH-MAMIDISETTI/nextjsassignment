@@ -1,7 +1,6 @@
-
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -36,4 +35,16 @@ export const uploadToFirebase = async (file: File, oldImageUrl?: string): Promis
   await uploadBytes(newImageRef, file);
   const newImageUrl = await getDownloadURL(newImageRef);
   return newImageUrl;
+};
+
+export const deleteFromFirebase = async (fileUrl: string): Promise<void> => {
+  try {
+    // Extract the file name from the URL
+    const fileName = fileUrl.split('/').pop() || '';
+    const fileRef = ref(storage, `products/${fileName}`);
+    await deleteObject(fileRef);
+  } catch (error) {
+    console.error('Error deleting file from Firebase:', error);
+    throw new Error('Failed to delete file from Firebase');
+  }
 };

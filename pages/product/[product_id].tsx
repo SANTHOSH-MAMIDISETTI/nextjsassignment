@@ -1,8 +1,3 @@
-
-
-
-
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -22,7 +17,7 @@ const ProductDetail = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>('');
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -173,7 +168,7 @@ const ProductDetail = () => {
           {cropping && (
             <div style={{ position: 'relative', width: '100%', height: 400 }}>
               <Cropper
-                image={imagePreview}
+                image={imagePreview || ''}
                 crop={crop}
                 zoom={zoom}
                 aspect={4 / 3}

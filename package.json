@@ -30,7 +30,7 @@
     "formik": "^2.4.6",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.4",
-    "next": "14.2.6",
+    "next": "^14.2.6",
     "next-auth": "^4.24.7",
     "nodemailer": "^6.9.14",
     "nookies": "^2.5.2",
