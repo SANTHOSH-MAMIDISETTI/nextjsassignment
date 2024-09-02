@@ -13,7 +13,6 @@
 /.next/
 /out/
 # /utils/serviceAccountKey.json
-utils/serviceAccountKey.json
 
 # production
 /build
@@ -37,3 +36,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+serviceAccountKey.json
