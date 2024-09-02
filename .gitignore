@@ -9,11 +9,11 @@
 
 # testing
 /coverage
-
+C:\Users\prane\Downloads\myproject\nextjsfullstack-master\utils\serviceAccountKey.json
 # next.js
 /.next/
 /out/
-/utils/serviceAccountKey.json
+# /utils/serviceAccountKey.json
 
 # production
 /build
