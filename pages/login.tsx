@@ -24,8 +24,10 @@ const Login = () => {
         // Redirect based on the role
         if (user.role === 'admin') {
           router.push('/admin/dashboard');
+          toast.success("register sucessfully")
         } else if (user.role === 'team member') {
           router.push('/team/dashboard');
+          toast.success("register sucessfully")
         } else {
           router.push('/unauthorized');
         }

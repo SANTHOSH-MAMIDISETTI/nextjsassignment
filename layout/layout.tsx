@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title, description, keywords,
       </Helmet>
       <Header1 />
       <br />
-      <main style={{ minHeight: '68.7vh' }}>
+      <main style={{ minHeight: '68.7vh' ,paddingBottom: '10%' }}>
         <ToastContainer />
         {children}
       </main>

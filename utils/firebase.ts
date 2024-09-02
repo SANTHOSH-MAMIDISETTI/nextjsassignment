@@ -2,6 +2,8 @@
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import { initializeApp } from "firebase/app";
+// import admin from 'firebase-admin';
+
 
 // Firebase configuration
 const firebaseConfig = {
@@ -14,6 +16,8 @@ const firebaseConfig = {
   measurementId: "G-E5T8XR8YNP"
 };
 
+
+// const bucket = admin.storage().bucket();
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -37,3 +41,6 @@ export const uploadToFirebase = async (file: File, oldImageUrl?: string): Promis
   const newImageUrl = await getDownloadURL(newImageRef);
   return newImageUrl;
 };
+
+
+

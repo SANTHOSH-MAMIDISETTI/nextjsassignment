@@ -26,6 +26,7 @@
     "bootstrap": "^5.3.3",
     "canvas": "^2.11.2",
     "firebase": "^10.13.0",
+    "firebase-admin": "^12.4.0",
     "formidable": "^3.5.1",
     "formik": "^2.4.6",
     "jsonwebtoken": "^9.0.2",
